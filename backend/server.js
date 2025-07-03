@@ -2,9 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-require('dotenv').config();
-const { verifyTokenMiddleware } = require('./middleware/verifyToken.middleware');
-const authRoutes = require('./routes/auth.routes');
+require('dotenv').config(); 
 const productoRoutes = require('./routes/producto.routes');
 const categoriaRoutes = require('./routes/categoria.routes');
 const movimientoRoutes = require('./routes/movimiento.routes');
@@ -18,7 +16,6 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware de seguridad
 app.use(helmet());
-app.use('/api/productos', verifyTokenMiddleware, require('./routes/producto.routes'));
 
 // CORS
 app.use(cors({
@@ -36,8 +33,7 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 // Rutas
-app.use('/api/auth', authRoutes);
-app.use('/api/productos', verifyTokenMiddleware, productoRoutes);
+app.use('/api/productos', productoRoutes);
 app.use('/api/categorias', categoriaRoutes);
 app.use('/api/movimientos', movimientoRoutes);
 
