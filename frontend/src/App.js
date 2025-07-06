@@ -1,19 +1,23 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Navbar from './components/layout/Navbar';
+import ProductosPage from './pages/ProductosPage';
+import CategoriasPage from './pages/CategoriasPage';
+import MovimientosPage from './pages/MovimientosPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>¡Bienvenido a tu nueva aplicación!</h1>
-        <p>Frontend React funcionando correctamente</p>
-        <p>
-          <a href="/api/health" target="_blank" rel="noopener noreferrer">
-            Verificar estado de la API
-          </a>
-        </p>
-      </header>
-    </div>
+    <Router>
+      <Navbar />
+      <main style={{ padding: '2rem' }}>
+        <Routes>
+          <Route path="/" element={<Navigate to="/productos" />} />
+          <Route path="/productos" element={<ProductosPage />} />
+          <Route path="/categorias" element={<CategoriasPage />} />
+          <Route path="/movimientos" element={<MovimientosPage />} />
+        </Routes>
+      </main>
+    </Router>
   );
 }
 
