@@ -1,4 +1,4 @@
-const ProductoCard = ({ producto }) => {
+const ProductoCard = ({ producto, onEditar, onEliminar }) => {
   return (
     <div style={{
       border: '1px solid #ccc',
@@ -9,7 +9,15 @@ const ProductoCard = ({ producto }) => {
     }}>
       <h3>{producto.nombre}</h3>
       <p>Stock: {producto.stock}</p>
-      <p>Categoría ID: {producto.categoriaId}</p>
+      <p>Categoría: {producto.categoria?.nombre || 'Sin categoría'}</p>
+
+      <button onClick={() => onEditar(producto)}>Editar</button>
+      <button
+        onClick={() => onEliminar(producto.id)}
+        style={{ marginLeft: '10px', color: 'red' }}
+      >
+        Eliminar
+      </button>
     </div>
   );
 };

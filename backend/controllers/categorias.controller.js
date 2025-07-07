@@ -7,7 +7,7 @@ module.exports = {
       include: {
         model: Producto,
         as: 'productos',
-        required: false // <- para que no filtre si no hay productos
+        required: false 
       }
     });
 
@@ -26,5 +26,30 @@ module.exports = {
       console.error('Error al crear categoría:', error);
       res.status(500).json({ error: 'No se pudo crear la categoría' });
     }
+  },
+  delete: async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const eliminados = await Categoria.destroy({
+      where: { id },
+    });
+
+    if (eliminados === 0) {
+      return res.status(404).json({ error: 'Categoría no encontrada' });
+    }
+
+    res.json({ mensaje: 'Categoría eliminada correctamente' });
+  } catch (error) {
+    console.error('Error al eliminar categoría:', error);
+
+    if (error.name === 'SequelizeForeignKeyConstraintError') {
+      return res.status(400).json({
+        error: 'No se puede eliminar la categoría porque tiene productos asociados',
+      });
+    }
+
+    res.status(500).json({ error: 'Error al eliminar la categoría' });
   }
+},
 };
