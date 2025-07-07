@@ -1,14 +1,14 @@
-const { Producto } = require('../models'); // Asegurate que la ruta es correcta
+const { Producto } = require('../models'); 
 
 module.exports = {
-  // Obtener todos los productos
+
     getAll: async (req, res) => {
     try {
       const productos = await Producto.findAll({
         include: {
           model: Categoria,
-          as: 'categoria', // este alias debe coincidir con el definido en el modelo
-          attributes: ['id', 'nombre'], // selecciona los campos que quieras mostrar
+          as: 'categoria', 
+          attributes: ['id', 'nombre'], 
         },
       });
       res.json(productos);
@@ -18,7 +18,6 @@ module.exports = {
     }
   },
 
-  // Crear un nuevo producto
   create: async (req, res) => {
     try {
       const nuevoProducto = await Producto.create(req.body);
@@ -29,7 +28,6 @@ module.exports = {
     }
   },
 
-  // Actualizar un producto existente
   update: async (req, res) => {
     try {
       const { id } = req.params;
@@ -48,7 +46,6 @@ module.exports = {
     }
   },
 
-  // Eliminar un producto
   remove: async (req, res) => {
     try {
       const { id } = req.params;
