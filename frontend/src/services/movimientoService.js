@@ -6,12 +6,6 @@ export const getMovimientos = async () => {
   return res.json();
 };
 
-export const getMovimientoById = async (id) => {
-  const res = await fetch(`${API_URL}/${id}`);
-  if (!res.ok) throw new Error('Movimiento no encontrado');
-  return res.json();
-};
-
 export const createMovimiento = async (data) => {
   const res = await fetch(API_URL, {
     method: 'POST',
@@ -32,10 +26,4 @@ export const updateMovimiento = async (id, data) => {
   return res.json();
 };
 
-export const deleteMovimiento = async (id) => {
-  const res = await fetch(`${API_URL}/${id}`, {
-    method: 'DELETE',
-  });
-  if (!res.ok) throw new Error('Error al eliminar movimiento');
-  return res.json();
-};
+

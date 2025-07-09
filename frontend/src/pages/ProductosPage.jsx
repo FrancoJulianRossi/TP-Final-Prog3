@@ -73,7 +73,16 @@ const ProductosPage = () => {
     <div>
       <h1>Productos</h1>
 
-      <button onClick={handleAgregar}>
+      <button onClick={handleAgregar}
+        style={{
+          backgroundColor: '#4caf50',
+          color: 'white',
+          padding: '6px 12px',
+          borderRadius: '4px',
+          border: 'none',
+          cursor: 'pointer',
+          marginBottom: '1rem',
+        }}>
         {formVisible ? 'Cancelar' : 'Nuevo producto'}
       </button>
 

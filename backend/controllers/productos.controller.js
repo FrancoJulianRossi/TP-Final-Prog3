@@ -1,6 +1,7 @@
-const { Producto, Categoria, Movimiento } = require('../models');
+const { Producto, Categoria } = require('../models');
 
 module.exports = {
+
   getAll: async (req, res) => {
     try {
       const productos = await Producto.findAll({
@@ -20,25 +21,18 @@ module.exports = {
   create: async (req, res) => {
     try {
       const nuevoProducto = await Producto.create(req.body);
-      if (nuevoProducto.stock > 0) {
-        await Movimiento.create({
-          tipo: 'ingreso',
-          cantidad: nuevoProducto.stock,
-          productoId: nuevoProducto.id,
-        });
-      }
-
       res.status(201).json({ mensaje: 'Producto creado', data: nuevoProducto });
     } catch (error) {
       console.error('Error al crear producto:', error);
       res.status(500).json({ error: 'Error al crear el producto' });
     }
   },
+
   update: async (req, res) => {
     try {
       const { id } = req.params;
       const [filasActualizadas] = await Producto.update(req.body, {
-        where: { id }
+        where: { id },
       });
 
       if (filasActualizadas === 0) {
