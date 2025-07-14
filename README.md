@@ -146,6 +146,8 @@ proyecto/
 ├── .env                        # Variables de entorno
 ├── .env.example               # Plantilla de variables
 ├── .gitignore                 # Archivos a ignorar en Git
+├── docker.sh                
+├── API_test.md
 ├── README.md                  # Documentación del proyecto
 │
 ├── frontend/
@@ -167,6 +169,7 @@ proyecto/
 │       |   │   ├── Navbar.jsx
 │       │   ├── ui/
 │       |   │   ├── CategoriaCard.jsx
+│       |   │   ├── Footer.jsx
 │       |   │   ├── MovimientoCard.jsx
 │       |   │   ├── ProductoCard.jsx
 │       ├── pages/             # Páginas de la aplicación
