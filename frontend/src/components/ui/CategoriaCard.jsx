@@ -1,7 +1,5 @@
-import React from 'react';
-
 const CategoriaCard = ({ categoria }) => {
-  const { nombre, productos = [] } = categoria;
+  const { id, nombre, productos = [] } = categoria;
 
   return (
     <div style={{
@@ -10,10 +8,9 @@ const CategoriaCard = ({ categoria }) => {
       padding: '1rem',
       marginBottom: '1rem',
       boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-      backgroundColor: '#e6f0ff'  // un azul muy suave para diferenciarlo
     }}>
       <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '0.5rem' }}>
-        {nombre}
+        {nombre} <span style={{ fontSize: '0.875rem', color: '#555' }}>(id: {id})</span>
       </h3>
 
       {productos.length > 0 ? (

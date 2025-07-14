@@ -25,12 +25,16 @@ const MovimientoCard = ({ movimiento, onEditar }) => {
     backgroundColor: tipo === 'ingreso' ? '#e6f4ea' : '#f9e6e6',
   };
 
-  const buttonStyle = {
-    marginRight: '8px',
-    padding: '6px 12px',
-    borderRadius: '4px',
+  const buttonBaseStyle = {
+    backgroundColor: '#2196f3',
+    color: 'white',
     border: 'none',
+    borderRadius: '6px',
+    padding: '6px 12px',
     cursor: 'pointer',
+    fontWeight: '600',
+    transition: 'background-color 0.3s',
+    marginRight: '8px',
   };
 
   return (
@@ -44,7 +48,12 @@ const MovimientoCard = ({ movimiento, onEditar }) => {
                 name="tipo"
                 value={form.tipo}
                 onChange={handleChange}
-                style={{ marginLeft: '0.5rem', padding: '4px', borderRadius: '4px', border: '1px solid #ccc' }}
+                style={{
+                  marginLeft: '0.5rem',
+                  padding: '4px',
+                  borderRadius: '4px',
+                  border: '1px solid #ccc',
+                }}
               >
                 <option value="ingreso">Ingreso</option>
                 <option value="egreso">Egreso</option>
@@ -58,7 +67,13 @@ const MovimientoCard = ({ movimiento, onEditar }) => {
                 name="cantidad"
                 value={form.cantidad}
                 onChange={handleChange}
-                style={{ marginLeft: '0.5rem', padding: '4px', borderRadius: '4px', border: '1px solid #ccc', width: '60px' }}
+                style={{
+                  marginLeft: '0.5rem',
+                  padding: '4px',
+                  borderRadius: '4px',
+                  border: '1px solid #ccc',
+                  width: '80px',
+                }}
               />
             </label>
 
@@ -69,20 +84,31 @@ const MovimientoCard = ({ movimiento, onEditar }) => {
                 name="productoId"
                 value={form.productoId}
                 onChange={handleChange}
-                style={{ marginLeft: '0.5rem', padding: '4px', borderRadius: '4px', border: '1px solid #ccc', width: '60px' }}
+                style={{
+                  marginLeft: '0.5rem',
+                  padding: '4px',
+                  borderRadius: '4px',
+                  border: '1px solid #ccc',
+                  width: '80px',
+                }}
               />
             </label>
           </div>
 
           <button
             onClick={handleGuardar}
-            style={{ ...buttonStyle, backgroundColor: '#4caf50', color: 'white' }}
+            style={{ ...buttonBaseStyle, backgroundColor: '#4caf50' }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#388e3c')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#4caf50')}
           >
             Guardar
           </button>
+
           <button
             onClick={() => setEditando(false)}
-            style={{ ...buttonStyle, backgroundColor: '#ccc' }}
+            style={{ ...buttonBaseStyle, backgroundColor: '#ccc', color: '#333' }}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#b3b3b3')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#ccc')}
           >
             Cancelar
           </button>
@@ -94,9 +120,12 @@ const MovimientoCard = ({ movimiento, onEditar }) => {
           <p>Producto: <span style={{ fontWeight: '600' }}>{producto?.nombre || `#${productoId}`}</span></p>
           <p>Cantidad: <span style={{ fontWeight: '600' }}>{cantidad}</span></p>
           <p style={{ fontSize: '0.8rem', color: '#666' }}>Fecha: {fechaFormateada}</p>
+
           <button
             onClick={() => setEditando(true)}
-            style={{ marginTop: '0.5rem', color: '#007bff', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+            style={buttonBaseStyle}
+            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#1976d2')}
+            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#2196f3')}
           >
             Editar
           </button>
