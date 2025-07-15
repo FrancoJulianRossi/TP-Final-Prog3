@@ -51,6 +51,16 @@ const ProductosPage = () => {
     setFormVisible(true);
   };
 
+  const toggleForm = () => {
+    if (formVisible) {
+      setFormVisible(false);
+      setModoEdicion(false);
+      setProductoActual({ nombre: '', descripcion: '', stock: 0, categoriaId: 1 });
+    } else {
+      handleAgregar();
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -70,50 +80,107 @@ const ProductosPage = () => {
   };
 
   return (
-    <div>
-      <h1>Productos</h1>
+    <div style={{ width: '100%', padding: '1rem' }}>
+      <h1 style={{ fontSize: '2rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+        Productos
+      </h1>
 
-      <button onClick={handleAgregar}
+      <button
+        onClick={toggleForm}
         style={{
           backgroundColor: '#4caf50',
           color: 'white',
-          padding: '6px 12px',
-          borderRadius: '4px',
+          padding: '8px 16px',
+          borderRadius: '6px',
           border: 'none',
           cursor: 'pointer',
           marginBottom: '1rem',
-        }}>
+          fontWeight: '600',
+          transition: 'background-color 0.3s',
+        }}
+        onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#45a049')}
+        onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#4caf50')}
+      >
         {formVisible ? 'Cancelar' : 'Nuevo producto'}
       </button>
 
       {formVisible && (
-        <form onSubmit={handleSubmit} style={{ marginTop: '1rem' }}>
+        <form
+          onSubmit={handleSubmit}
+          style={{ marginBottom: '1.5rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}
+        >
           <input
             type="text"
             placeholder="Nombre"
             value={productoActual.nombre}
             onChange={(e) => setProductoActual({ ...productoActual, nombre: e.target.value })}
             required
+            style={{
+              flexGrow: 1,
+              padding: '8px',
+              borderRadius: '6px',
+              border: '1px solid #ccc',
+              fontSize: '1rem',
+            }}
           />
           <input
             type="text"
             placeholder="Descripción"
             value={productoActual.descripcion}
             onChange={(e) => setProductoActual({ ...productoActual, descripcion: e.target.value })}
+            style={{
+              flexGrow: 1,
+              padding: '8px',
+              borderRadius: '6px',
+              border: '1px solid #ccc',
+              fontSize: '1rem',
+            }}
           />
           <input
             type="number"
             placeholder="Stock"
             value={productoActual.stock}
             onChange={(e) => setProductoActual({ ...productoActual, stock: parseInt(e.target.value) })}
+            required
+            style={{
+              flexGrow: 1,
+              padding: '8px',
+              borderRadius: '6px',
+              border: '1px solid #ccc',
+              fontSize: '1rem',
+            }}
           />
           <input
             type="number"
             placeholder="Categoría ID"
             value={productoActual.categoriaId}
             onChange={(e) => setProductoActual({ ...productoActual, categoriaId: parseInt(e.target.value) })}
+            required
+            style={{
+              flexGrow: 1,
+              padding: '8px',
+              borderRadius: '6px',
+              border: '1px solid #ccc',
+              fontSize: '1rem',
+            }}
           />
-          <button type="submit">{modoEdicion ? 'Actualizar' : 'Agregar'}</button>
+          <button
+            type="submit"
+            style={{
+              backgroundColor: '#2196f3',
+              color: 'white',
+              border: 'none',
+              borderRadius: '6px',
+              padding: '8px 16px',
+              cursor: 'pointer',
+              fontWeight: '600',
+              transition: 'background-color 0.3s',
+            }}
+            onMouseEnter={e => (e.currentTarget.style.backgroundColor = '#1976d2')}
+            onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#2196f3')}
+          >
+            {modoEdicion ? 'Actualizar' : 'Agregar'}
+          </button>
         </form>
       )}
 
